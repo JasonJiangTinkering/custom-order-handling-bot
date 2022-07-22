@@ -10,10 +10,19 @@ sys.path.insert(1, './sensitiveInfo')
 import importantusers
 import json
 #TODO: 
-# create order sql db
 # create visual for order
-# create messaging to "take on the order"
+# create system for people to take on orders
+    # causes them to be invited in a thread
+    # pin a order message
+# create systems to drop orders
+    #causes them to be droped from the thread
+# create commands to see your active order
+    #links to your special threads
+# catch finished submission
+#command to see all unverified/not sent to customer submissions
 # sample users testing
+# create email hooks
+
 import sqlite3
 import discord
 def runServer(TOKEN):
@@ -43,14 +52,11 @@ def runServer(TOKEN):
     client.run(TOKEN)
 
 # TODO: insure that docker doesnt have permission issues wth db
-if os.path.isfile("master.db"):
-    os.remove("master.db") 
-    
 connection = sqlite3.connect("master.db")
 cursor = connection.cursor()
 # NOTE Order is a key work // cannot name table order
 
-cursor.execute('''CREATE TABLE ComikInkOrders (
+cursor.execute('''CREATE TABLE IF NOT EXISTS ComikInkOrders (
     name TEXT,
     email TEXT,
     image_url TEXT,
